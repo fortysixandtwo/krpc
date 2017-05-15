@@ -1,0 +1,13 @@
+v0.3.7
+ * Add InfernalRobotics.Available
+
+v0.3.5
+ * Add vessel parameter to ServoGroups, Servos and ServoWithName (#282)
+ * Add Servo.Part
+ * Add ServoGroup.Parts
+
+v0.3.3
+ * Rename ControlGroup to ServoGroup
+
+v0.1.9
+ * Initial version - API for InfernalRobotics (http://forum.kerbalspaceprogram.com/threads/116064)

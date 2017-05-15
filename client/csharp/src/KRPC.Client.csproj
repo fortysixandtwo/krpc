@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5D390973-8F07-4B28-827F-FB3A1E739FD7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>KRPC.Client</RootNamespace>
+    <AssemblyName>KRPC.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>bin\Debug\KRPC.Client.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>bin\Release\KRPC.Client.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Google.Protobuf">
+      <HintPath>..\..\..\bazel-krpc\external\csharp_protobuf\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\bazel-bin\client\csharp\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Attributes\RPCAttribute.cs" />
+    <Compile Include="Connection.cs" />
+    <Compile Include="Encoder.cs" />
+    <Compile Include="ExpressionUtils.cs" />
+    <Compile Include="IConnection.cs" />
+    <Compile Include="RemoteObject.cs" />
+    <Compile Include="RPCException.cs" />
+    <Compile Include="Stream.cs" />
+    <Compile Include="StreamManager.cs" />
+    <Compile Include="..\..\..\bazel-genfiles\protobuf\KRPC.cs">
+      <Link>KRPC.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\bazel-genfiles\client\csharp\Services\KRPC.cs">
+      <Link>Services\KRPC.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\bazel-genfiles\client\csharp\Services\SpaceCenter.cs">
+      <Link>Services\SpaceCenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\bazel-genfiles\client\csharp\Services\KerbalAlarmClock.cs">
+      <Link>Services\KerbalAlarmClock.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\bazel-genfiles\client\csharp\Services\InfernalRobotics.cs">
+      <Link>Services\InfernalRobotics.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

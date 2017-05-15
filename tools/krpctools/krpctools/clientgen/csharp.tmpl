@@ -1,0 +1,164 @@
+using Google.Protobuf;
+using System;
+using System.Collections.Generic;
+{% macro args(parameters) %}
+var _args = new ByteString[] {
+{% for x in parameters %}
+    global::KRPC.Client.Encoder.Encode ({{x.name_value}}, typeof({{x.type}})){% if not loop.last %},{% endif %}
+
+{% endfor %}
+};
+{% endmacro %}
+{% macro call(service, procedure, has_return, has_args, is_static=False) %}
+{% if has_return %}ByteString _data = {% endif %}connection.Invoke ("{{service}}", "{{procedure}}"{% if has_args %}, _args{% endif %});
+{% endmacro %}
+{% macro return(type, is_static=False) %}
+return ({{type}})global::KRPC.Client.Encoder.Decode (_data, typeof({{type}}), connection);
+{% endmacro %}
+{% macro sig_parameters(parameters) %}
+{% for x in parameters %}{{x.type}} {{x.name}}{% if 'default_value' in x %} = {{x.default_value}}{%- endif %}{% if not loop.last %}, {% endif %}{% endfor %}
+{% endmacro %}
+
+namespace KRPC.Client.Services.{{ service_name }}
+{
+    /// <summary>
+    /// Extension methods for {{ service_name }} service.
+    /// </summary>
+    public static class ExtensionMethods
+    {
+        /// <summary>
+        /// Create an instance of the {{ service_name }} service.
+        /// </summary>
+        public static global::KRPC.Client.Services.{{ service_name }}.Service {{ service_name }} (this global::KRPC.Client.IConnection connection)
+        {
+            return new global::KRPC.Client.Services.{{ service_name }}.Service (connection);
+        }
+    }
+
+    /// <summary>
+    /// {{ service_name }} service.
+    /// </summary>
+    public class Service
+    {
+        {% if procedures.items() | length > 0 or properties.items() | length > 0 %}
+        global::KRPC.Client.IConnection connection;
+
+        internal Service (global::KRPC.Client.IConnection serverConnection)
+        {
+            connection = serverConnection;
+        }
+        {% else %}
+        internal Service (global::KRPC.Client.IConnection serverConnection)
+        {
+        }
+        {% endif %}
+        {% for procedure_name,procedure in procedures.items() %}
+
+{{ procedure.documentation | indent(width=8) }}
+        [global::KRPC.Client.Attributes.RPCAttribute ("{{ service_name }}", "{{ procedure_name }}")]
+        public {{ procedure.return_type }} {{ procedure_name }} ({{ sig_parameters(procedure.parameters) }})
+        {
+{% if procedure.parameters | length > 0 %}{{ args(procedure.parameters) | indent(width=12) }}
+{% endif %}
+{{ call(service_name, procedure.remote_name, procedure.return_type != 'void', procedure.parameters | length > 0) | indent(width=12) }}
+{% if procedure.return_type != 'void' %}{{ return(procedure.return_type) | indent(width=12) }}
+{% endif %}
+        }
+        {% endfor %}
+        {% for property_name,property in properties.items() %}
+
+{{ property.documentation | indent(width=8) }}
+        {% if property.getter %}
+        [global::KRPC.Client.Attributes.RPCAttribute ("{{ service_name }}", "{{ property.getter.remote_name }}")]
+        {% endif %}
+        public {{ property.type }} {{ property_name }} {
+        {% if property.getter %}
+            get {
+{{ call(service_name, property.getter.remote_name, true, false) | indent(width=16) }}
+{{ return(property.type, false) | indent(width=16) }}
+            }
+        {% endif %}
+        {% if property.setter %}
+            set {
+{{ args([{'name': 'value', 'name_value': 'value', 'type': property.type}]) | indent(width=16) }}
+{{ call(service_name, property.setter.remote_name, false, true) | indent(width=16) }}
+            }
+        {% endif %}
+        }
+        {% endfor %}
+    }
+    {% for enum_name,enm in enumerations.items() %}
+
+{{ enm.documentation | indent(width=4) }}
+    [Serializable]
+    public enum {{ enum_name }}
+    {
+        {% for value in enm['values'] %}
+{{ value.documentation | indent(width=8) }}
+        {{ value.name }} = {{ value.value }}{% if not loop.last %},{% endif %}
+
+        {% endfor %}
+    }
+    {% endfor %}
+    {% for class_name,cls in classes.items() %}
+
+{{ cls.documentation | indent(width=4) }}
+    public class {{ class_name }} : global::KRPC.Client.RemoteObject
+    {
+        /// <summary>
+        /// Construct an instance of this remote object. Should not be called directly. This interface is intended for internal decoding.
+        /// </summary>
+        public {{ class_name }} (global::KRPC.Client.IConnection connection, UInt64 id) : base (connection, id)
+        {
+        }
+        {% for method_name,method in cls.methods.items() %}
+
+{{ method.documentation | indent(width=8) }}
+        [global::KRPC.Client.Attributes.RPCAttribute ("{{ service_name }}", "{{ method.remote_name }}")]
+        public {{ method.return_type }} {{ method_name }} ({{ sig_parameters(method.parameters) }})
+        {
+{{ args([{'name': 'this', 'name_value': 'this', 'type': service_name+'.'+class_name}] + method.parameters) | indent(width=12) }}
+{{ call(service_name, method.remote_name, method.return_type != 'void', true) | indent(width=12) }}
+{% if method.return_type != 'void' %}{{ return(method.return_type) | indent(width=12) }}
+{% endif %}
+        }
+        {% endfor %}
+        {% for method_name,method in cls.static_methods.items() %}
+
+{{ method.documentation | indent(width=8) }}
+        /// <param name="connection">A connection object.</param>
+        [global::KRPC.Client.Attributes.RPCAttribute ("{{ service_name }}", "{{ method.remote_name }}")]
+        public static {{ method.return_type }} {{ method_name }} (IConnection connection, {{ sig_parameters(method.parameters) }})
+        {
+{% if method.parameters | length > 0 %}{{ args(method.parameters) | indent(width=12) }}
+{% endif %}
+{{ call(service_name, method.remote_name, method.return_type != 'void', method.parameters | length > 0, true) | indent(width=12) }}
+{% if method.return_type != 'void' %}{{ return(method.return_type, true) | indent(width=12) }}
+{% endif %}
+        }
+        {% endfor %}
+        {% for property_name,property in cls.properties.items() %}
+
+{{ property.documentation | indent(width=8) }}
+        {% if property.getter %}
+        [global::KRPC.Client.Attributes.RPCAttribute ("{{ service_name }}", "{{ property.getter.remote_name }}")]
+        {% endif %}
+        public {{ property.type }} {{ property_name }} {
+        {% if property.getter %}
+            get {
+{{ args([{'name': 'this', 'name_value': 'this', 'type': service_name+'.'+class_name }]) | indent(width=16) }}
+{{ call(service_name, property.getter.remote_name, true, true) | indent(width=16) }}
+{{ return(property.type, false) | indent(width=16) }}
+            }
+        {% endif %}
+        {% if property.setter %}
+            set {
+{{ args([{'name': 'this', 'name_value': 'this', 'type': service_name+'.'+class_name }, {'name': 'value', 'name_value': 'value', 'type': property.type}]) | indent(width=16) }}
+{{ call(service_name, property.setter.remote_name, false, true) | indent(width=16) }}
+            }
+        {% endif %}
+        }
+        {% endfor %}
+    }
+    {% endfor %}
+}

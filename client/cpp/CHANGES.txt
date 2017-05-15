@@ -1,0 +1,40 @@
+v0.3.8
+ * Update to protobuf v3.2.0
+ * Update build scripts to check for protobuf >= 3.2 (#374)
+ * Move krpc::connect into client constructor to allow use of smart pointers
+ * Fix bug in StreamManager when client is not set
+
+v0.3.7
+ * Add missing header to automake script
+ * Add stream freezing (#357)
+ * Make stream objects default and copy constructible (#358)
+
+v0.3.6
+ * Fix configure script
+
+v0.3.4
+ * Update to protobuf v3.0.0-beta-3
+
+v0.2.3
+ * Make client thread safe
+ * Add checks for asio.hpp and protobuf library to cmake script
+ * Add Windows with MSVC support to cmake script
+ * Fix compiler warnings reported by MSVC
+
+v0.2.2
+ * Add support for streams (#175)
+ * Add documentation to service header files
+ * Add autotools and cmake build scripts
+ * Move header file krpc/krpc.hpp -> krpc.hpp
+ * Remove support for protobuf enumeration and custom protobuf messages
+ * Add comparison operations for remote objects
+
+v0.2.1
+ * Remove dependency on boost
+ * Use standalone ASIO library for network communication
+
+v0.2.0
+ * Update to protobuf 3.0.0-beta-2
+
+v0.1.12
+ * Initial version

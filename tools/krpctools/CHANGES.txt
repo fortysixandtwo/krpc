@@ -1,0 +1,19 @@
+v0.3.8
+ * Clean up code to meet PEP 8 guidelines
+
+v0.3.7
+ * Fix bug parsing nested collection types
+ * Fix bug generating key type for dictionaries
+
+v0.3.6
+ * Fix generating Java client stubs using krpc-clientgen with Python 3 (#308)
+
+v0.3.4
+ * Update protobuf to v3.0.0-beta-3
+
+v0.2.2
+ * Refactor into 'krpctools' package containing 'krpc-clientgen', 'krpc-docgen' and 'krpc-servicedefs'.
+ * Fixes caused by removal of support for protobuf enumeration and custom protobuf messages from server and clients
+
+v0.2.1
+ * Initial version

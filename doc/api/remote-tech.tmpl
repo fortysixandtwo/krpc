@@ -1,0 +1,25 @@
+.. default-domain:: {{ domain.sphinxname }}
+.. highlight:: {{ domain.name }}
+
+RemoteTech API
+==============
+
+Provides RPCs to interact with the `RemoteTech`_ mod. Provides the following classes:
+
+.. toctree::
+   :includehidden:
+   :maxdepth: 2
+
+   remote-tech/remote-tech
+   remote-tech/comms
+   remote-tech/antenna
+
+Example
+-------
+
+The following example sets the target of a dish on the active vessel then prints
+out the signal delay to the active vessel.
+
+.. literalinclude:: /scripts/RemoteTechExample.{{ domain.codeext }}
+
+.. _RemoteTech: http://forum.kerbalspaceprogram.com/index.php?/topic/75245-11-remotetech-v1610-2016-04-12/

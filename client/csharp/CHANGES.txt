@@ -1,0 +1,28 @@
+v0.3.8
+ * Update to protobuf v3.2.0
+
+v0.3.7
+ * Update to protobuf v3.1.0
+ * Remove pre-release flag from nuget version
+
+v0.3.5
+ * Fix race condition where the connection constructor returns before the stream server connection has been established
+ * Make Connection and StreamManager disposable so that they clean up resources correctly
+ * Fix issue where network streams are closed prematurely
+ * Fix issue with receiving partial protobuf messages
+
+v0.3.4
+ * Update to protobuf v3.0.0-beta-3
+
+v0.2.3
+ * Make client thread safe
+
+v0.2.2
+ * Remove support for protobuf enumeration and custom protobuf messages
+
+v0.2.1
+ * Add documentation to generated service code
+ * Add support for streams
+
+v0.2.0
+ * Initial version

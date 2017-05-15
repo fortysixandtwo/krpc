@@ -1,0 +1,149 @@
+{% macro service(x) %}{{ mark_documented(x) }}
+.. class:: {{ x.name }}
+
+{{ gendoc(x.documentation) | indent }}
+
+{% for member in x.members.values() %}
+{% if member.member_type == 'procedure' %}
+{{ procedure(member) | indent }}
+{% elif member.member_type == 'property' %}
+{{ property(member) | indent }}
+{% endif %}
+
+{% endfor %}
+{% endmacro %}
+
+{% macro class(x) %}{{ mark_documented(x) }}
+.. class:: {{ x.name }}
+
+{{ gendoc(x.documentation) | indent }}
+
+{% if hasdoc(x.documentation, './remarks') %}{{ remarks(x.documentation) | indent }}
+
+{% endif %}
+{% for member in x.members.values() %}
+{% if member.member_type == 'class_method' %}
+{{ class_method(member) | indent }}
+{% elif member.member_type == 'class_static_method' %}
+{{ class_static_method(member) | indent }}
+{% elif member.member_type == 'class_property' %}
+{{ class_property(member) | indent }}
+{% endif %}
+
+{% endfor %}
+{% endmacro %}
+
+{% macro procedure(x) %}{{ mark_documented(x) }}
+.. method:: {{ domain.return_type(x.return_type) }} {{ x.name }}({{ parameters(x.parameters) }})
+
+{{ gendoc(x.documentation) | indent }}
+
+{{ parameters_description(x.parameters) }}
+{% if hasdoc(x.documentation, './returns') %}{{ returns(x.documentation) | indent }}
+{% endif %}
+
+{% if hasdoc(x.documentation, './remarks') %}{{ remarks(x.documentation) | indent }}
+
+{% endif %}
+{% if x.appended != '' %}{{ x.appended | indent }}
+{% endif %}
+{% endmacro %}
+
+{% macro property(x) %}{{ mark_documented(x) }}
+.. property:: {{ domain.return_type(x.type) }} {{ x.name }} {{'{'}}{% if x.getter != None %} get;{% endif %}{% if x.setter != None %} set;{% endif %} {{'}'}}
+
+{{ gendoc(x.documentation) | indent }}
+
+{% if hasdoc(x.documentation, './returns') %}{{ returns(x.documentation) | indent }}
+{% endif %}
+
+{% if hasdoc(x.documentation, './remarks') %}{{ remarks(x.documentation) | indent }}
+
+{% endif %}
+{% if x.appended != '' %}{{ x.appended | indent }}
+{% endif %}
+{% endmacro %}
+
+{% macro class_method(x) %}{{ mark_documented(x) }}
+.. method:: {{ domain.return_type(x.return_type) }} {{ x.name }}({{ parameters(x.parameters[1:]) }})
+
+{{ gendoc(x.documentation) | indent }}
+
+{{ parameters_description(x.parameters[1:]) }}
+{% if hasdoc(x.documentation, './returns') %}{{ returns(x.documentation) | indent }}
+{% endif %}
+
+{% if hasdoc(x.documentation, './remarks') %}{{ remarks(x.documentation) | indent }}
+
+{% endif %}
+{% if x.appended != '' %}{{ x.appended | indent }}
+{% endif %}
+{% endmacro %}
+
+{% macro class_static_method(x) %}{{ mark_documented(x) }}
+.. method:: static {{ domain.return_type(x.return_type) }} {{ x.name }}(IConnection connection, {{ parameters(x.parameters) }})
+
+{{ gendoc(x.documentation) | indent }}
+
+{{ parameters_description(x.parameters) }}
+{% if hasdoc(x.documentation, './returns') %}{{ returns(x.documentation) | indent }}
+{% endif %}
+
+{% if hasdoc(x.documentation, './remarks') %}{{ remarks(x.documentation) | indent }}
+
+{% endif %}
+{% if x.appended != '' %}{{ x.appended | indent }}
+{% endif %}
+{% endmacro %}
+
+{% macro class_property(x) %}{{ mark_documented(x) }}
+{{ property(x) }}
+{% endmacro %}
+
+{% macro enumeration(x) %}{{ mark_documented(x) }}
+.. enum:: {{ x.name }}
+
+{{ gendoc(x.documentation) | indent }}
+
+{% if hasdoc(x.documentation, './remarks') %}{{ remarks(x.documentation) | indent }}{% endif %}
+{% for value in x.values.values() %}{{ mark_documented(value) }}
+   .. value:: {{ value.name }}
+
+{{ gendoc(value.documentation) | indent(width=6) }}
+
+{% if hasdoc(value.documentation, './remarks') %}{{ remarks(value.documentation) | indent(width=6) }}{% endif %}
+{% endfor %}
+{% endmacro %}
+
+{% macro parameters(x) %}
+{% for p in x %}{{ parameter(p) }}{% if not loop.last %}, {% endif %}{% endfor %}
+{% endmacro %}
+
+{% macro parameter(x) %}
+{% if not x.has_default_value -%}
+{{ domain.parameter_type(x.type) }} {{ x.name }}
+{%- else -%}
+{{ domain.parameter_type(x.type) }} {{ x.name }} = {{ domain.default_value(x.type, x.default_value) }}
+{%- endif %}
+{% endmacro %}
+
+{% macro parameters_description(x) %}
+{% if x | length > 0 %}
+   :parameters:
+
+   {% for p in x %}
+   {% if hasdoc(p.documentation, './param[@name=\''+p.name+'\']') %}    * **{{ p.name }}** -- {{ gendoc(p.documentation, './param[@name=\''+p.name+'\']') | singleline }}{% endif %}
+
+   {% endfor %}
+{% endif %}
+{% endmacro %}
+
+{% macro returns(x) %}
+:returns: {{ gendoc(x, './returns') | singleline }}
+{% endmacro %}
+
+{% macro remarks(x) %}
+.. note::
+
+{{ gendoc(x, './remarks') | indent }}
+{% endmacro %}

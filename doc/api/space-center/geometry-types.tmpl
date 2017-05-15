@@ -1,0 +1,22 @@
+.. default-domain:: {{ domain.sphinxname }}
+.. highlight:: {{ domain.name }}
+{{ domain.currentmodule('SpaceCenter') }}
+{% import domain.macros as macros with context %}
+
+Geometry Types
+==============
+
+Vectors
+-------
+
+3-dimensional vectors are represented as a 3-tuple. For example:
+
+.. literalinclude:: /scripts/Vector3.{{ domain.codeext }}
+
+Quaternions
+-----------
+
+Quaternions (rotations in 3-dimensional space) are encoded as a 4-tuple
+containing the x, y, z and w components. For example:
+
+.. literalinclude:: /scripts/Quaternion.{{ domain.codeext }}

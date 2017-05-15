@@ -1,0 +1,890 @@
+GAME
+{
+  version = 1.2.2
+  Title = krpctest (SANDBOX)
+  Description = No description available.
+  linkURL =
+  linkCaption =
+  Mode = SANDBOX
+  Status = 1
+  Seed = 796869268
+  scene = 5
+  editor = None
+  flag = Squad/Flags/default
+  launchID = 2
+  modded = True
+  envInfo =  - Environment Info - Unix FFFFFFFFFFFFFFFF  Args: KSP.x86  -
+  versionFull = 1.2.2.1622 (LinuxPlayer)
+  versionCreated = 1.2.2.1622 (LinuxPlayer)
+  PARAMETERS
+  {
+    preset = Custom
+    FLIGHT
+    {
+      CanQuickSave = True
+      CanQuickLoad = True
+      CanAutoSave = True
+      CanUseMap = True
+      CanSwitchVesselsNear = True
+      CanSwitchVesselsFar = True
+      CanTimeWarpHigh = True
+      CanTimeWarpLow = True
+      CanEVA = True
+      CanIVA = True
+      CanBoard = True
+      CanRestart = True
+      CanLeaveToEditor = True
+      CanLeaveToTrackingStation = True
+      CanLeaveToSpaceCenter = True
+      CanLeaveToMainMenu = True
+    }
+    EDITOR
+    {
+      CanSave = True
+      CanLoad = True
+      CanStartNew = True
+      CanLaunch = True
+      CanLeaveToSpaceCenter = True
+      CanLeaveToMainMenu = False
+      startUpMode = 0
+      craftFileToLoad =
+    }
+    TRACKINGSTATION
+    {
+      CanFlyVessel = True
+      CanAbortVessel = True
+      CanLeaveToSpaceCenter = True
+      CanLeaveToMainMenu = False
+    }
+    SPACECENTER
+    {
+      CanGoInVAB = True
+      CanGoInSPH = True
+      CanGoInTrackingStation = True
+      CanLaunchAtPad = True
+      CanLaunchAtRunway = True
+      CanGoToAdmin = True
+      CanGoToAstronautC = True
+      CanGoToMissionControl = True
+      CanGoToRnD = True
+      CanSelectFlag = True
+      CanLeaveToMainMenu = True
+    }
+    DIFFICULTY
+    {
+      AutoHireCrews = True
+      MissingCrewsRespawn = True
+      RespawnTimer = 7200
+      BypassEntryPurchaseAfterResearch = True
+      AllowStockVessels = True
+      IndestructibleFacilities = False
+      ResourceAbundance = 1
+      ReentryHeatScale = 1
+      EnableCommNet = True
+    }
+    CAREER
+    {
+      TechTreeUrl = GameData/Squad/Resources/TechTree.cfg
+      StartingFunds = 25000
+      StartingScience = 0
+      StartingReputation = 0
+      FundsGainMultiplier = 1
+      RepGainMultiplier = 1
+      ScienceGainMultiplier = 1
+      FundsLossMultiplier = 1
+      RepLossMultiplier = 1
+      RepLossDeclined = 1
+    }
+    CommNetParams
+    {
+      requireSignalForControl = False
+      plasmaBlackout = False
+      rangeModifier = 1
+      DSNModifier = 1
+      occlusionMultiplierVac = 0.9
+      occlusionMultiplierAtm = 0.75
+      enableGroundStations = True
+    }
+    AdvancedParams
+    {
+      EnableKerbalExperience = False
+      ImmediateLevelUp = False
+      AllowNegativeCurrency = False
+      PressurePartLimits = False
+      GPartLimits = False
+      GKerbalLimits = False
+      KerbalGToleranceMult = 1
+      ResourceTransferObeyCrossfeed = False
+      ActionGroupsAlways = False
+      BuildingImpactDamageMult = 0.05
+      PartUpgradesInSandbox = False
+      PartUpgradesInCareer = True
+    }
+  }
+  SCENARIO
+  {
+    name = CommNetScenario
+    scene = 7, 8, 5, 6
+  }
+  SCENARIO
+  {
+    name = PartUpgradeManager
+    scene = 6, 5, 7
+    UPGRADES
+    {
+      Unlocks
+      {
+      }
+      Enableds
+      {
+      }
+    }
+  }
+  SCENARIO
+  {
+    name = ResourceScenario
+    scene = 7, 8, 5, 6
+    RESOURCE_SETTINGS
+    {
+      GameSeed = 2010313933
+      MaxDeltaTime = 21600
+    }
+  }
+  SCENARIO
+  {
+    name = ScenarioNewGameIntro
+    scene = 5, 6, 8
+    kscComplete = True
+    editorComplete = True
+    tsComplete = False
+  }
+  SCENARIO
+  {
+    name = ProgressTracking
+    scene = 7, 8, 5
+    Progress
+    {
+    }
+  }
+  SCENARIO
+  {
+    name = VesselRecovery
+    scene = 5, 7, 8, 6
+  }
+  SCENARIO
+  {
+    name = ScenarioAchievements
+    scene = 7, 8, 5, 6
+  }
+  SCENARIO
+  {
+    name = ScenarioCustomWaypoints
+    scene = 7, 8
+  }
+  SCENARIO
+  {
+    name = ScenarioDestructibles
+    scene = 5, 7, 6, 8
+    SpaceCenter/VehicleAssemblyBuilding/Facility/ksp_pad_cylTank
+    {
+      intact = True
+    }
+    SpaceCenter/VehicleAssemblyBuilding/Facility/Tank
+    {
+      intact = True
+    }
+    SpaceCenter/VehicleAssemblyBuilding/Facility/mainBuilding
+    {
+      intact = True
+    }
+    SpaceCenter/VehicleAssemblyBuilding/Facility/PodMemorial
+    {
+      intact = True
+    }
+    SpaceCenter/TrackingStation/Facility/dish_array/dish_south
+    {
+      intact = True
+    }
+    SpaceCenter/TrackingStation/Facility/dish_array/dish_north
+    {
+      intact = True
+    }
+    SpaceCenter/TrackingStation/Facility/dish_array/dish_east
+    {
+      intact = True
+    }
+    SpaceCenter/TrackingStation/Facility/MainBuilding
+    {
+      intact = True
+    }
+    SpaceCenter/SpaceplaneHangar/Facility/Tank
+    {
+      intact = True
+    }
+    SpaceCenter/SpaceplaneHangar/Facility/ksp_pad_cylTank
+    {
+      intact = True
+    }
+    SpaceCenter/SpaceplaneHangar/Facility/ksp_pad_waterTower
+    {
+      intact = True
+    }
+    SpaceCenter/SpaceplaneHangar/Facility/mainBuilding
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/model_runway_new_v43/runway_light_SE
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/model_runway_new_v43/runway_light_NE
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/model_runway_new_v43/runway_light_NW
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/model_runway_new_v43/runway_light_SW
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/End09
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/End27
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/Section1
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/Section2
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/Section3
+    {
+      intact = True
+    }
+    SpaceCenter/Runway/Facility/Section4
+    {
+      intact = True
+    }
+    SpaceCenter/ResearchAndDevelopment/Facility/ksp_pad_cylTank
+    {
+      intact = True
+    }
+    SpaceCenter/ResearchAndDevelopment/Facility/SmallLab
+    {
+      intact = True
+    }
+    SpaceCenter/ResearchAndDevelopment/Facility/CentralBuilding
+    {
+      intact = True
+    }
+    SpaceCenter/ResearchAndDevelopment/Facility/MainBuilding
+    {
+      intact = True
+    }
+    SpaceCenter/ResearchAndDevelopment/Facility/CornerLab
+    {
+      intact = True
+    }
+    SpaceCenter/ResearchAndDevelopment/Facility/WindTunnel
+    {
+      intact = True
+    }
+    SpaceCenter/ResearchAndDevelopment/Facility/Observatory
+    {
+      intact = True
+    }
+    SpaceCenter/ResearchAndDevelopment/Facility/SideLab
+    {
+      intact = True
+    }
+    SpaceCenter/MissionControl/Facility/building
+    {
+      intact = True
+    }
+    SpaceCenter/LaunchPad/Facility/LaunchPadMedium/ksp_pad_cylTank
+    {
+      intact = True
+    }
+    SpaceCenter/LaunchPad/Facility/LaunchPadMedium/ksp_pad_launchPad
+    {
+      intact = True
+    }
+    SpaceCenter/LaunchPad/Facility/LaunchPadMedium/ksp_pad_sphereTank
+    {
+      intact = True
+    }
+    SpaceCenter/LaunchPad/Facility/LaunchPadMedium/ksp_pad_waterTower
+    {
+      intact = True
+    }
+    SpaceCenter/LaunchPad/Facility/LaunchPadMedium/KSCFlagPoleLaunchPad
+    {
+      intact = True
+    }
+    SpaceCenter/FlagPole/Facility
+    {
+      intact = True
+    }
+    SpaceCenter/AstronautComplex/Facility/building
+    {
+      intact = True
+    }
+    SpaceCenter/Administration/Facility/mainBuilding
+    {
+      intact = True
+    }
+    SpaceCenter/VehicleAssemblyBuilding/Facility/VAB2
+    {
+      intact = True
+    }
+    SpaceCenter/MissionControl/Facility/mainBuilding
+    {
+      intact = True
+    }
+    SpaceCenter/LaunchPad/Facility/Flag
+    {
+      intact = True
+    }
+    SpaceCenter/TrackingStation/Facility/building
+    {
+      intact = True
+    }
+    SpaceCenter/TrackingStation/Facility/OuterDish
+    {
+      intact = True
+    }
+  }
+  SCENARIO
+  {
+    name = ScenarioDiscoverableObjects
+    scene = 7, 8, 5
+    lastSeed = 559298752
+    sizeCurve
+    {
+      key = 0 0 1.5 1.5
+      key = 0.3 0.45 0.875 0.875
+      key = 0.7 0.55 0.875 0.875
+      key = 1 1 1.5 1.5
+    }
+  }
+  FLIGHTSTATE
+  {
+    version = 1.2.2
+    UT = 16.259999999999742
+    activeVessel = 0
+    mapViewFiltering = -1026
+    commNetUIModeTracking = Network
+    commNetUIModeFlight = Path
+    VESSEL
+    {
+      pid = 8a589f20db8a40cdae383d9a8e82ef9c
+      name = Untitled Space Craft
+      type = Ship
+      sit = PRELAUNCH
+      landed = True
+      landedAt = KSC_LaunchPad_Platform
+      splashed = False
+      met = 0
+      lct = 15.099999999999767
+      lastUT = 15.099999999999767
+      root = 0
+      lat = -0.097207782704932716
+      lon = -74.557673716253618
+      alt = 72.840554784052074
+      hgt = 0.337528914
+      nrm = 2.44379044E-06,1.00000012,-4.76837158E-07
+      rot = -0.700981021,-0.0921616927,-0.0973197818,0.700471938
+      CoM = 0,0,0
+      stg = 0
+      prst = False
+      ref = 2146653091
+      ctrl = True
+      cPch =
+      cHdg =
+      cMod = 0
+      ORBIT
+      {
+        SMA = NaN
+        ECC = 1
+        INC = 0.097207782708412349
+        LPE = 90
+        LAN = 285.69491770805365
+        MNA = 0
+        EPH = 15.119999999999767
+        REF = 1
+      }
+      PART
+      {
+        name = mk1pod
+        cid = 4294749318
+        uid = 2146653091
+        mid = 2503413381
+        launchID = 1
+        parent = 0
+        position = 0,0,0
+        rotation = 0,0,0,1
+        mirror = 1,1,1
+        symMethod = Radial
+        istg = -1
+        resPri = 0
+        dstg = 0
+        sqor = -1
+        sepI = -1
+        sidx = -1
+        attm = 0
+        srfN = , -1
+        attN = bottom, -1
+        attN = top, -1
+        mass = 0.800000012
+        shielded = False
+        temp = 312.48207007079878
+        tempExt = 312.53647834924078
+        tempExtUnexp = 312.53777070251442
+        expt = 0.5
+        state = 0
+        attached = True
+        autostrutMode = Off
+        rigidAttachment = False
+        flag = Squad/Flags/default
+        rTrf = mk1pod
+        modCost = 0
+        crew = Jebediah Kerman
+        EVENTS
+        {
+        }
+        ACTIONS
+        {
+        }
+        PARTDATA
+        {
+        }
+        MODULE
+        {
+          name = ModuleCommand
+          isEnabled = True
+          hibernation = False
+          hibernateOnWarp = False
+          stagingEnabled = True
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+            HibernateToggle
+            {
+              actionGroup = None
+              active = False
+            }
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        MODULE
+        {
+          name = ModuleReactionWheel
+          isEnabled = True
+          actuatorModeCycle = 0
+          authorityLimiter = 100
+          stateString = Idle
+          stagingEnabled = True
+          WheelState = Active
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+            CycleAction
+            {
+              actionGroup = None
+            }
+            Activate
+            {
+              actionGroup = None
+            }
+            Deactivate
+            {
+              actionGroup = None
+            }
+            Toggle
+            {
+              actionGroup = None
+            }
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        MODULE
+        {
+          name = ModuleColorChanger
+          isEnabled = True
+          animState = False
+          stagingEnabled = True
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+            ToggleAction
+            {
+              actionGroup = Light
+            }
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        MODULE
+        {
+          name = ModuleScienceExperiment
+          isEnabled = True
+          Deployed = False
+          Inoperable = False
+          cooldownToGo = 0
+          stagingEnabled = True
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+            DeployAction
+            {
+              actionGroup = None
+            }
+            ResetAction
+            {
+              actionGroup = None
+            }
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        MODULE
+        {
+          name = ModuleScienceContainer
+          isEnabled = True
+          stagingEnabled = True
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+            CollectAllAction
+            {
+              actionGroup = None
+            }
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        MODULE
+        {
+          name = FlagDecal
+          isEnabled = True
+          flagDisplayed = True
+          stagingEnabled = True
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        MODULE
+        {
+          name = ModuleConductionMultiplier
+          isEnabled = True
+          stagingEnabled = True
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        MODULE
+        {
+          name = ModuleDataTransmitter
+          isEnabled = True
+          xmitIncomplete = False
+          stagingEnabled = True
+          canComm = True
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+            StartTransmissionAction
+            {
+              actionGroup = None
+              active = False
+            }
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        MODULE
+        {
+          name = ModuleLiftingSurface
+          isEnabled = True
+          stagingEnabled = True
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        MODULE
+        {
+          name = ModuleTripLogger
+          isEnabled = True
+          stagingEnabled = True
+          EVENTS
+          {
+          }
+          ACTIONS
+          {
+          }
+          Log
+          {
+            flight = 0
+          }
+          UPGRADESAPPLIED
+          {
+          }
+        }
+        RESOURCE
+        {
+          name = ElectricCharge
+          amount = 50
+          maxAmount = 50
+          flowState = True
+          isTweakable = True
+          hideFlow = False
+          isVisible = True
+          flowMode = Both
+        }
+        RESOURCE
+        {
+          name = MonoPropellant
+          amount = 10
+          maxAmount = 10
+          flowState = True
+          isTweakable = True
+          hideFlow = False
+          isVisible = True
+          flowMode = Both
+        }
+      }
+      ACTIONGROUPS
+      {
+        Stage = False, 0
+        Gear = False, 0
+        Light = False, 0
+        RCS = False, 0
+        SAS = False, 0
+        Brakes = False, 0
+        Abort = False, 0
+        Custom01 = False, 0
+        Custom02 = False, 0
+        Custom03 = False, 0
+        Custom04 = False, 0
+        Custom05 = False, 0
+        Custom06 = False, 0
+        Custom07 = False, 0
+        Custom08 = False, 0
+        Custom09 = False, 0
+        Custom10 = False, 0
+      }
+      DISCOVERY
+      {
+        state = -1
+        lastObservedTime = 0
+        lifetime = Infinity
+        refTime = Infinity
+        size = 2
+      }
+      FLIGHTPLAN
+      {
+      }
+      CTRLSTATE
+      {
+        pitch = 0
+        yaw = 0
+        roll = 0
+        trimPitch = 0
+        trimYaw = 0
+        trimRoll = 0
+        mainThrottle = 0.5
+      }
+      VESSELMODULES
+      {
+        FlightIntegrator
+        {
+        }
+        CommNetVessel
+        {
+          controlState = KerbalFull
+          canComm = True
+        }
+      }
+    }
+  }
+  LoaderInfo
+  {
+    ProceduralFairings v0.0.3.17 = True
+    Google.Protobuf v0.0.0.0 = True
+    KRPC.Drawing v0.3.7.0 = True
+    KRPC.InfernalRobotics v0.3.7.0 = True
+    KRPC.KerbalAlarmClock v0.3.7.0 = True
+    KRPC.RemoteTech v0.3.7.0 = True
+    KRPC.SpaceCenter v0.3.7.0 = True
+    KRPC.UI v0.3.7.0 = True
+    KRPC v0.3.7.0 = True
+    TestingTools v0.3.7.0 = True
+    ProceduralFairings = True
+    kRPC = True
+    .DS_Store = True
+  }
+  ROSTER
+  {
+    KERBAL
+    {
+      name = Jebediah Kerman
+      gender = Male
+      type = Crew
+      trait = Pilot
+      brave = 0.5
+      dumb = 0.5
+      badS = True
+      veteran = True
+      tour = False
+      state = Assigned
+      inactive = False
+      inactiveTimeEnd = 0
+      gExperienced = 0
+      outDueToG = False
+      ToD = 0
+      idx = 0
+      extraXP = 0
+      CAREER_LOG
+      {
+        flight = 0
+      }
+      FLIGHT_LOG
+      {
+        flight = 0
+      }
+    }
+    KERBAL
+    {
+      name = Bill Kerman
+      gender = Male
+      type = Crew
+      trait = Engineer
+      brave = 0.5
+      dumb = 0.800000012
+      badS = False
+      veteran = True
+      tour = False
+      state = Available
+      inactive = False
+      inactiveTimeEnd = 0
+      gExperienced = 0
+      outDueToG = False
+      ToD = 0
+      idx = -1
+      extraXP = 0
+      CAREER_LOG
+      {
+        flight = 0
+      }
+      FLIGHT_LOG
+      {
+        flight = 0
+      }
+    }
+    KERBAL
+    {
+      name = Bob Kerman
+      gender = Male
+      type = Crew
+      trait = Scientist
+      brave = 0.300000012
+      dumb = 0.100000001
+      badS = False
+      veteran = True
+      tour = False
+      state = Available
+      inactive = False
+      inactiveTimeEnd = 0
+      gExperienced = 0
+      outDueToG = False
+      ToD = 0
+      idx = -1
+      extraXP = 0
+      CAREER_LOG
+      {
+        flight = 0
+      }
+      FLIGHT_LOG
+      {
+        flight = 0
+      }
+    }
+    KERBAL
+    {
+      name = Valentina Kerman
+      gender = Female
+      type = Crew
+      trait = Pilot
+      brave = 0.550000012
+      dumb = 0.400000006
+      badS = True
+      veteran = True
+      tour = False
+      state = Available
+      inactive = False
+      inactiveTimeEnd = 0
+      gExperienced = 0
+      outDueToG = False
+      ToD = 0
+      idx = -1
+      extraXP = 0
+      CAREER_LOG
+      {
+        flight = 0
+      }
+      FLIGHT_LOG
+      {
+        flight = 0
+      }
+    }
+  }
+  MESSAGESYSTEM
+  {
+    flash = False
+  }
+}
